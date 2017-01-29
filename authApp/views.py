@@ -12,6 +12,8 @@ def register_view(request):
         form = MyUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            # TODO: Не нашел более простого способа для того чтобы
+            #       передать параметры через GET запрос
             return redirect("%s?registered=1" % reverse("auth_login"))
         else:
             errors = "Имеются ошибки в заполнении формы"

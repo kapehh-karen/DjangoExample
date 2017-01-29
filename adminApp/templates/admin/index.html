@@ -22,7 +22,16 @@
                             <tr>
                                 <td>{{ item.id }}</td>
                                 <td>{{ item }}</td>
-                                <td>XXX</td>
+                                <td>
+                                    <a href="#" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        Edit
+                                    </a>
+                                    <a href="#" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        Delete
+                                    </a>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
