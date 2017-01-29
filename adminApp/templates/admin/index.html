@@ -8,35 +8,40 @@
         </div>
         <div class="panel-body">
             {% if list %}
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Имя</th>
-                                <th>Управление</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in list %}
-                            <tr>
-                                <td>{{ item.id }}</td>
-                                <td>{{ item }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-default">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Имя</th>
+                        <th>Управление</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in list %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item }}</td>
+                            <td>
+                                {# Чтобы случайно не удалить супер-пользователя, проверяем #}
+                                {% if not item.is_superuser %}
+                                    <a href="{% url 'admin_user_edit' item.id %}" class="btn btn-default">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                         Edit
                                     </a>
-                                    <a href="#" class="btn btn-danger">
+                                    <a href="{% url 'admin_user_remove' item.id %}" class="btn btn-danger">
                                         <span class="glyphicon glyphicon-remove"></span>
                                         Delete
                                     </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                                {% else %}
+                                    <p>-</p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% endif %}
         </div>
     </div>

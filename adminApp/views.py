@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from functools import wraps
 
@@ -7,6 +7,8 @@ from functools import wraps
 
 # Декоратор для проверки прав пользователя
 def user_is_admin(method):
+    # wraps юзаю для того, чтобы при ошибках в методе 'method'
+    # у меня в логах было имя функции view, а не "inner"
     @wraps(method)
     def inner(request, *args, **kwargs):
         if request.user.is_superuser:
@@ -28,11 +30,12 @@ def index_view(request):
 
 @user_is_admin
 def edit_view(request, user_id):
-    print(user_id)
-    return redirect("/")
+    user = get_object_or_404(User, pk=user_id)
+    return render(request, "admin/user/user_edit.html", {"selected_user": user})
 
 
 @user_is_admin
 def remove_view(request, user_id):
-    print(user_id)
-    return redirect("/")
+    user = get_object_or_404(User, pk=user_id)
+    user.delete()
+    return redirect("admin_index")

@@ -14,8 +14,16 @@
 <body>
 
 <div class="container">
-    {% block container %}
-    {% endblock %}
+    <div class="margin-top-50 panel panel-default">
+        <div class="panel-body">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'site_index' %}">Главная</a></li>
+                <li><a href="{% url 'admin_index' %}">Админка</a></li>
+            </ol>
+            {% block container %}
+            {% endblock %}
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap & jQuery -->
