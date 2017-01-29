@@ -1,0 +1,21 @@
+.margin-top-p13 {
+    margin-top: 13%;
+}
+
+.main-title {
+    color: white;
+}
+
+.main-title .header {
+    font-family: 'Lobster', cursive;
+    font-size: 3.0em;
+}
+
+.main-title .content {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.7em;
+}
+
+.main-title .username {
+    color: lightgreen;
+}

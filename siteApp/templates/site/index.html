@@ -1,0 +1,19 @@
+{% extends "site/base.html" %}
+
+{% block container %}
+<div class="main-title margin-top-p13">
+    <p class="header text-center">
+        Привет,
+        {% if user.is_authenticated %}<span class="username">{{ user }}</span>{% else %}Анон{% endif %}!
+    </p>
+    <p class="content text-justify">
+        Добро пожаловать на страницу-заглушку.
+        На этой странице отображается имя авторизованного пользователя.
+        Ты можешь <a href="{% url 'auth_login' %}">авторизоваться</a> или
+        <a href="{% url 'auth_register' %}">зарегистрироваться</a> и увидеть
+        своё имя в заголовке. Это реально прикольно!
+        А после авторизации, всегда можно сделать <a href="{% url 'auth_logout' %}">логаут</a> из системы.
+        <strong>Попробуй!</strong>
+    </p>
+</div>
+{% endblock %}

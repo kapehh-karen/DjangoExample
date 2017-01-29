@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+
+{% block container %}
+{% for title, list in data.items %}
+    <div class="margin-top-50 panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ title }}</h3>
+        </div>
+        <div class="panel-body">
+            {% if list %}
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Имя</th>
+                                <th>Управление</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in list %}
+                            <tr>
+                                <td>{{ item.id }}</td>
+                                <td>{{ item }}</td>
+                                <td>XXX</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
