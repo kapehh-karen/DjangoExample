@@ -35,7 +35,7 @@ def login_view(request):
             )
             if user:
                 login(request, user)
-                return redirect("/")
+                return redirect("site_index")
             else:
                 errors = "Введены некорректные имя пользователя или пароль. " \
                          "Либо такого пользователя не существует."
@@ -53,4 +53,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/")
+    return redirect("site_index")

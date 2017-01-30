@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from functools import wraps
+from .forms import MyUserChangeForm
 
 
 # Create your views here.
@@ -30,8 +31,24 @@ def index_view(request):
 
 @user_is_admin
 def edit_view(request, user_id):
+    errors = None
     user = get_object_or_404(User, pk=user_id)
-    return render(request, "admin/user/user_edit.html", {"selected_user": user})
+
+    if request.method == "POST":
+        form = MyUserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("admin_index")
+        else:
+            errors = "Форма заполнена некорректно"
+    else:
+        form = MyUserChangeForm(instance=user)
+
+    return render(request, "admin/user/user_edit.html", {
+        "form": form,
+        "selected_user": user,
+        "errors": errors
+    })
 
 
 @user_is_admin

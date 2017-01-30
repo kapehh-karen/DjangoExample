@@ -14,18 +14,8 @@ class UserLoginForm(forms.Form):
 
 
 class MyUserCreationForm(UserCreationForm):
-    username = forms.CharField(
-        label="Имя",
-        widget=forms.TextInput(attrs={"class": "form-control"})
-    )
-    password1 = forms.CharField(
-        label="Пароль",
-        widget=forms.PasswordInput(attrs={"class": "form-control"})
-    )
-    password2 = forms.CharField(
-        label="Повтор пароля",
-        widget=forms.PasswordInput(attrs={"class": "form-control"})
-    )
-
     def __init__(self, *args, **kwargs):
         super(MyUserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
