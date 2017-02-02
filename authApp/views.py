@@ -23,7 +23,7 @@ def register_view(request):
     return render(request, "auth/register.html", {"form": form, "errors": errors})
 
 
-def login_view(request):
+def login_view(request, next=None):
     errors = None
 
     if request.method == "POST":
@@ -35,7 +35,7 @@ def login_view(request):
             )
             if user:
                 login(request, user)
-                return redirect("site_index")
+                return redirect(next) if next else redirect("site_index")
             else:
                 errors = "Введены некорректные имя пользователя или пароль. " \
                          "Либо такого пользователя не существует."
@@ -46,6 +46,7 @@ def login_view(request):
 
     return render(request, "auth/login.html", {
         "form": form,
+        "next": next,
         "errors": errors,
         "registered": request.GET.get("registered")
     })

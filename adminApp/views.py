@@ -1,24 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from functools import wraps
+from main.decorators import user_is_admin
 from .forms import MyUserChangeForm
 
 
 # Create your views here.
-
-# Декоратор для проверки прав пользователя
-def user_is_admin(method):
-    # wraps юзаю для того, чтобы при ошибках в методе 'method'
-    # у меня в логах было имя функции view, а не "inner"
-    @wraps(method)
-    def inner(request, *args, **kwargs):
-        if request.user.is_superuser:
-            return method(request, *args, **kwargs)
-
-        return render(request, "admin/forbidden.html")
-
-    return inner
-
 
 @user_is_admin
 def index_view(request):

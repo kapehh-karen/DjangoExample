@@ -18,7 +18,7 @@
             </div>
         {% endif %}
         {% if not user.is_authenticated %}
-            <form action="{% url 'auth_login' %}" method="post">
+            <form action="{% url 'auth_login' next %}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-success">Вход</button>
