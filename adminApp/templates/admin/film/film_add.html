@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+
+{% block container %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h4 class="text-center">
+            Добавление фильма
+        </h4>
+        {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ errors }}
+        </div>
+        {% endif %}
+        <form action="{% url 'admin_film_add' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Добавить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

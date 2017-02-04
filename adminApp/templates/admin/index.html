@@ -1,13 +1,13 @@
 {% extends "admin/base.html" %}
 
 {% block container %}
-{% for title, list in data.items %}
+{% for item in data %}
     <div class="margin-top-50 panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ title }}</h3>
+            <h3 class="panel-title">{{ item.fields.title }}</h3>
         </div>
         <div class="panel-body">
-            {% if list %}
+            {% if item.fields.list %}
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -18,30 +18,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for item in list %}
+                    {% for sub_item in item.fields.list %}
                         <tr>
-                            <td>{{ item.id }}</td>
-                            <td>{{ item }}</td>
+                            <td>{{ sub_item.id }}</td>
+                            <td>{{ sub_item }}</td>
                             <td>
-                                {# Чтобы случайно не удалить себя #}
-                                {% if not item.id == user.id %}
-                                    <a href="{% url 'admin_user_edit' item.id %}" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                        Edit
-                                    </a>
-                                    <a href="{% url 'admin_user_remove' item.id %}" class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                        Delete
-                                    </a>
-                                {% else %}
-                                    <p>-</p>
-                                {% endif %}
+                                <a href="{% url item.fields.url_edit sub_item.id %}" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    Edit
+                                </a>
+                                <a href="{% url item.fields.url_delete sub_item.id %}" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                    Delete
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% endif %}
+            {% if item.fields.support_add %}
+                <a class="btn btn-default" href="{% url item.fields.url_add %}">Добавить</a>
             {% endif %}
         </div>
     </div>

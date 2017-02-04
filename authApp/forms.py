@@ -6,7 +6,7 @@ from main.decorators import bootstrap_form
 @bootstrap_form
 class UserLoginForm(forms.Form):
     username = forms.CharField(label="Имя")
-    password = forms.CharField(label="Пароль")
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput())
 
 
 @bootstrap_form
